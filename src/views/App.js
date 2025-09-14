@@ -1,22 +1,50 @@
 import logo from './logo.svg';
 import './App.scss';
-// import MyComponent from './Example/MyComponent';
+import MyComponent from './Example/MyComponent';
 import ListTodo from './Todos/ListTodo';
+import Home from './Home';
+import Nav from './Nav/Nav';
 import { ToastContainer, toast } from 'react-toastify';
+import React from "react";
+import ListUser from './User/ListUser';
+import DetailUser from './User/DetailUser';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/todos">
+              <ListTodo />
+            </Route>
+            <Route path="/about">
+              <MyComponent />
+            </Route>
 
-        <p>Simple Todo app with React thanhxcode </p>
-        {/* <MyComponent /> */}
-        <ListTodo />
-      </header >
+            <Route path="/users" exact>
+              <ListUser />
+            </Route>
 
-      <ToastContainer />
-    </div >
+            <Route path="/user/:id">
+              <DetailUser />
+            </Route>
+          </Switch>
+        </header >
+
+        <ToastContainer />
+      </div >
+    </Router>
   );
 }
 
